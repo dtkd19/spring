@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<div layout:fragment="content">
+    <div class="container-md">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">글쓴이</th>
+                <th scope="col">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="bvo:${list}">
+                    <td>[[${bvo.bno }]]</td>
+                    <td>[[${bvo.title }]]</td>
+                    <td>[[${bvo.writer }]]</td>
+                    <td>[[${bvo.regDate }]]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
