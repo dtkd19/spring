@@ -28,6 +28,10 @@
         select count(bno) from board
         <include refid="search"></include>
     </select>
+    <select id="getMaxBno" resultType="long">
+        select max(bno) from board;
+    </select>
+
 
 
     <sql id="search">

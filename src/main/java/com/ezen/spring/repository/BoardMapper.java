@@ -9,15 +9,19 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    int register(BoardVO boardVO);
+//    int registerFile(BoardDTO BoardDTO);
+
+    int register(BoardVO BoardVO);
 
     List<BoardVO> getList(PagingVO pgvo);
 
-    BoardVO getDetail(int bno);
+    BoardVO getDetail(long bno);
 
-    int modify(BoardVO boardVO);
+    int modify(BoardVO boardDTO);
 
     int delete(int bno);
 
     int getTotal(PagingVO pgvo);
+
+    long getMaxBno();
 }
