@@ -20,7 +20,32 @@
         select * from auth where email = #{email}
     </select>
 
+    <select id="getList" resultType="com.ezen.spring.domain.UserVO">
+        select * from user order by reg_date desc
+    </select>
 
+    <update id="modifyNoPwd">
+        update user set nick_name = #{nickName}
+        where email = #{email}
+    </update>
+
+    <update id="modify">
+        update user set nick_name = #{nickName}, pwd = #{pwd}
+        where email = #{email}
+    </update>
+
+    <delete id="deleteAuth">
+        delete from auth where email = #{email}
+    </delete>
+
+    <delete id="delete">
+        delete from user where email = #{email}
+    </delete>
+
+    <update id="lastLogin">
+        update user set last_login = now()
+        where email = #{email}
+    </update>
 
 
 

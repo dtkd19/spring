@@ -15,4 +15,16 @@ public interface UserMapper {
     UserVO selectEmail(String username);
 
     List<AuthVO> selectAuths(String username);
+
+    List<UserVO> getList();
+
+    int modifyNoPwd(UserVO userVO);
+
+    int modify(UserVO userVO);
+
+    int deleteAuth(String email);
+
+    int delete(String email);
+
+    int lastLogin(String email);
 }

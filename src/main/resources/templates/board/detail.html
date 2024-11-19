@@ -2,7 +2,8 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+      layout:decorate="~{layout/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div layout:fragment="content" class="container-md">
     <th:block th:with="bvo=${bdto.bvo}">
@@ -73,11 +74,15 @@
        <br>
        <!--/* comment line */-->
        <!--/* post */-->
+       <th:block sec:authorize="isAuthenticated()">
        <div class="input-group mb-3">
-           <span class="input-group-text" id="cmtWriter">NickName</span>
+           <span class="input-group-text" id="cmtWriter" th:text="${#authentication.getPrincipal().userVO.nickName}"></span>
+<!--           <span class="input-group-text" id="cmtWriter" th:text="${#authentication ne null} ?
+           ${#authentication.getPrincipal().userVO.nickName} : 'NickName' "></span>-->
            <input type="text"  id="cmtText" class="form-control" placeholder="Add Comment" aria-label="Comment" aria-describedby="basic-addon1">
            <button type="button" id="cmtAddBtn"  class="btn btn-outline-success">post</button>
        </div>
+       </th:block>
 
        <!--/* spread */-->
        <ul class="list-group list-group-flush" id="cmtListArea">
@@ -120,10 +125,20 @@
      <!--*/  <a th:href="@{/board/modify(bno=${bvo.bno})}"><button type="button" id="modBtn" class="btn btn-primary">modify</button></a>
        <a th:href="@{/board/delete(bno=${bvo.bno})}"><button type="button" id="delBtn" class="btn btn-danger">delete</button></a> */ -->
 
+
+        <th:block sec:authorize="isAuthenticated()"
+                  th:with="auth=${#authentication.getPrincipal().userVO.nickName}">
+            <script th:inline="javascript">
+                let nickName = [[${auth}]];
+                console.log(nickName);
+            </script>
+        </th:block>
+
        <script th:inline="javascript">
            const bnoVal = [[${bvo.bno}]];
            console.log(bnoVal);
        </script>
+
        <script th:src="@{/js/boardDetail.js}"></script>
        <script th:src="@{/js/boardRegister.js}"></script>
        <script th:src="@{/js/boardComment.js}"></script>
